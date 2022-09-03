@@ -1,0 +1,23 @@
+@import '../../style/sass/_variables';
+@import '../../style/sass/_mixins';
+
+button {
+  height: 40px;
+  width: 160px;
+  border: none;
+  background-color: $brand-400;
+  border-radius: 4px;
+  color: $white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: $brand-500;
+  }
+
+  &:disabled {
+    background-color: $brand-100;
+    cursor: not-allowed;
+  }
+}

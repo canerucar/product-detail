@@ -1,1 +1,12 @@
-@import url(normalize.css);
+//reset
+@import './reset.css';
+
+//font
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap');
+
+//sass
+@import './sass/variables.scss';
+@import './sass/mixins.scss';
+
+//pages and components
+@import 'app.scss';

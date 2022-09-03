@@ -7,11 +7,17 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "css": "sass --watch ./src/style/index.scss ./src/style/output.css"
+    "css": "sass --watch ./src/style/index.scss ./src/style/output.css",
+    "db": "json-server --watch ./src/api/db.json"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.5",
+    "axios": "^0.27.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.2",
+    "sass": "^1.54.5",
+    "swiper": "^8.3.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",
