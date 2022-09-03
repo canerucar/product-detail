@@ -20,13 +20,13 @@ export default function App() {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   const dispatch = useDispatch();
-  const productImages = useSelector(state => state.products);
+  const product = useSelector(state => state);
 
-  useEffect(() => { 
-    dispatch(getProductVariantsAsync());
-  }, []);
+  useEffect(() => {
+    dispatch(getProductVariantsAsync(product.products.selectColor));
+  }, [product.products.selectColor]);
 
-  if (productImages == 0) {
+  if (product.products == 0) {
     return <div>Loading...</div>
   }
 
@@ -43,7 +43,7 @@ export default function App() {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2"
       >
-        {productImages.images.map((productVariant,index) =>
+        {product.products.images.map((productVariant,index) =>
           <SwiperSlide key={index}>
             <img src={productVariant}/>
           </SwiperSlide>
@@ -58,7 +58,7 @@ export default function App() {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper"
       >
-        {productImages.images.map((productVariant, index) =>
+        {product.products.images.map((productVariant, index) =>
           <SwiperSlide key={index}>
             <img src={productVariant}/>
           </SwiperSlide>

@@ -4,7 +4,6 @@ export const getProductTitleAsync = createAsyncThunk(
   'product/getProductTitleAsync',
   async () => {
     const resp = await fetch(`${import.meta.env.VITE_URL}/productTitle`);
-    console.log(import.meta.env.VITE_URL);
     if (resp.ok) {
       const data = await resp.json();
       return { data };

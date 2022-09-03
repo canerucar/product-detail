@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import Button from './components/button';
 
 import { getProductTitleAsync, selectableAttributesAsync } from './api/requests/index';
+import { handleColor, handleSize } from './redux/product/productSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 function App() {
@@ -18,14 +19,6 @@ function App() {
     dispatch(getProductTitleAsync());
     dispatch(selectableAttributesAsync());
   }, [dispatch]);
-
-  function handleColor(color) {
-    console.log(color);
-  }
-
-  function handleSize(size) { 
-    console.log(size);
-  }
   
   if (product.size == 0 || product.color == 0) {
     return <div>Loading...</div>
@@ -52,7 +45,7 @@ function App() {
               {product.color.values.map((color, index) =>
                 <div key={index}>
                   <label htmlFor="one">{color}</label>
-                  <input type="radio" id="one" name="color" value={color} onClick={()=>handleColor(color)} />
+                  <input type="radio" id="one" name="color" value={color} onClick={()=>dispatch(handleColor(color))} />
                 </div>
               )} 
             </div>
@@ -62,7 +55,7 @@ function App() {
               {product.size.values.map((size, index) =>
                 <div key={index}>
                   <label htmlFor="one-size">{size}</label>
-                  <input type="radio" id="one-size" name="size" value={size} onClick={()=>handleSize(size)}  />
+                  <input type="radio" id="one-size" name="size" value={size} onClick={()=>dispatch(handleSize(size))}  />
                 </div>
                 
               )} 

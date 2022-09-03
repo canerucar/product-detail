@@ -7,20 +7,39 @@ const initialState = {
   images: [],
   color: [],
   size: [],
-  button: true
+  button: true,
+  selectColor: "",
+  selectSize: "",
 }
 
 const productSlice = createSlice({
   name: "product",
   initialState,
-  reducers: {},
+  reducers: {
+    handleColor: (state, action) => {
+      state.selectColor = action.payload;
+      if (state.selectColor && state.selectSize) {
+        state.button = false;
+      }
+    },
+    handleSize: (state, action) => {
+      state.selectSize = action.payload;
+      if (state.selectColor && state.selectSize) {
+        state.button = false;
+      }
+    }
+  },
   extraReducers: {
     [getProductTitleAsync.fulfilled]: (state, action) => {
       state.title = action.payload.data[0];
     },
 
     [getProductVariantsAsync.fulfilled]: (state, action) => {
-      state.images = action.payload.data[0].images;
+      if (action.meta.arg == "Siyah") {
+        state.images = action.payload.data[0].images;
+      } else {
+        state.images = action.payload.data[1].images;
+      }
     },
 
     [selectableAttributesAsync.fulfilled]: (state, action) => {
@@ -30,4 +49,5 @@ const productSlice = createSlice({
   },
 });
 
+export const { handleColor, handleSize } = productSlice.actions;
 export default productSlice.reducer;
