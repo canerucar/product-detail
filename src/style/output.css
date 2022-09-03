@@ -119,7 +119,7 @@
   transform: translateX(-50%) translateY(-50%);
   width: 100%;
   text-align: center;
-  border-right: 1px solid gray;
+  border-right: 1px solid #999999;
 }
 .product-detail-content-right .total-piece .total div:last-child label {
   border-right: none;
