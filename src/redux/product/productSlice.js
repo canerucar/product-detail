@@ -4,29 +4,42 @@ import { getProductTitleAsync, getProductVariantsAsync, selectableAttributesAsyn
 
 const initialState = {
   title: "",
-  images: [],
+  items: [],
   color: [],
   size: [],
   button: true,
   selectColor: "",
   selectSize: "",
+  itemsSelectedSize: [],
+  productImages: [],
+  modal: false,
 }
 
 const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
-    handleColor: (state, action) => {
-      state.selectColor = action.payload;
-      if (state.selectColor && state.selectSize) {
+    handleSize: (state, action) => {
+      state.selectSize = action.payload;
+      if (state.selectSize) {
         state.button = false;
       }
     },
-    handleSize: (state, action) => {
-      state.selectSize = action.payload;
-      if (state.selectColor && state.selectSize) {
-        state.button = false;
-      }
+    handleSelect: (state, action) => {
+      state.selectColor = action.payload;
+      const filtered = state.items.filter(item => item.attributes[1].value === action.payload)
+      state.itemsSelectedSize = filtered.map(item => {
+        return {
+          size: item?.attributes[0].value
+        }
+      })
+      state.productImages = filtered?.[0]?.images
+    },
+    handleButton: (state, action) => {
+      state.modal = true;
+    },
+    closeModal: (state, action) => {
+      state.modal = false;
     }
   },
   extraReducers: {
@@ -35,11 +48,7 @@ const productSlice = createSlice({
     },
 
     [getProductVariantsAsync.fulfilled]: (state, action) => {
-      if (action.meta.arg == "Siyah") {
-        state.images = action.payload.data[0].images;
-      } else {
-        state.images = action.payload.data[1].images;
-      }
+      state.items = action.payload.data;
     },
 
     [selectableAttributesAsync.fulfilled]: (state, action) => {
@@ -49,5 +58,5 @@ const productSlice = createSlice({
   },
 });
 
-export const { handleColor, handleSize } = productSlice.actions;
+export const { handleSize, handleSelect, handleButton, closeModal } = productSlice.actions;
 export default productSlice.reducer;

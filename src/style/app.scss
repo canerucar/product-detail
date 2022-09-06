@@ -6,9 +6,7 @@
   &-content {
     height: 100vh;
     background-color: $brand-bg-color;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include center;
 
     &-left {
       width: 700px;
@@ -245,5 +243,36 @@
         }
       }
     }
+  }
+}
+.modal {
+  background-color: $white;
+  border: 1px solid $brand-100;
+  border-radius: 2px;
+  padding: 12px 16px;
+  position: relative;
+  height: 200px;
+  width: 350px;
+  @include center;
+  flex-direction: column;
+  line-height: 1.5;
+
+  &-overlay {
+    position: absolute;
+    z-index: 9;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: $brand-transparent-100;
+    @include center;
+  }
+
+  &-close {
+    position: absolute;
+    right: 8px;
+    top: 4px;
+    font-size: 24px;
+    cursor: pointer;
   }
 }

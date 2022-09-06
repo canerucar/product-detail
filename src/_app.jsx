@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import Button from './components/button';
 
 import { getProductTitleAsync, selectableAttributesAsync } from './api/requests/index';
-import { handleColor, handleSize } from './redux/product/productSlice';
+import { handleSelect, handleSize, handleButton, closeModal } from './redux/product/productSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 function App() {
@@ -20,6 +20,12 @@ function App() {
     dispatch(selectableAttributesAsync());
   }, [dispatch]);
   
+  useEffect(()=>{
+    product.items.length > 0 &&  dispatch(handleSelect(product.items[0]?.attributes?.[1]?.value))
+  }, [product.items])
+  
+  console.log('product', product.items);
+
   if (product.size == 0 || product.color == 0) {
     return <div>Loading...</div>
   }
@@ -44,20 +50,19 @@ function App() {
               <div className="memory-title">{product.color.name} :</div>
               {product.color.values.map((color, index) =>
                 <div key={index}>
-                  <label htmlFor="one">{color}</label>
-                  <input type="radio" id="one" name="color" value={color} onClick={()=>dispatch(handleColor(color))} />
+                  <label htmlFor={color}>{color}</label>
+                  <input type="radio" id={color} name="color" value={color} onClick={()=>dispatch(handleSelect(color))} />
                 </div>
               )} 
             </div>
 
             <div className="memory color">
               <div className="memory-title">{product.size.name} :</div>
-              {product.size.values.map((size, index) =>
+              {product.itemsSelectedSize?.map((size, index) =>
                 <div key={index}>
-                  <label htmlFor="one-size">{size}</label>
-                  <input type="radio" id="one-size" name="size" value={size} onClick={()=>dispatch(handleSize(size))}  />
+                  <label htmlFor={size?.size}>{size?.size}</label>
+                  <input type="radio" id={size?.size} name="size" value={size?.size} onClick={()=>dispatch(handleSize(size?.size))}  />
                 </div>
-                
               )} 
             </div>
 
@@ -97,13 +102,26 @@ function App() {
                   <div className='total-b-center-title'>300.000, TL</div>
                   <div className='total-b-center-cargo'>Kargo Ücreti : alıcı öder</div>
                   <div className='total-b-center-basket'>
-                    <Button name="SEPETE EKLE" disable={product.button} />
+                    <Button name="SEPETE EKLE" click={() => dispatch(handleButton())} disable={product.button} />
                   </div>
                 </div>
                 <div className='total-b-right'>
                   Ödeme Seçenekleri
                 </div>
               </div>
+                {product.modal &&
+                  <div className="modal-overlay">
+                    <div className="modal">
+                      <div>
+                        Color : {product?.selectColor}
+                      </div>
+                      <div>
+                        Size : {product?.selectSize}
+                      </div>
+                    <span className="modal-close" onClick={()=> dispatch(closeModal())}>&#10005;</span>
+                    </div>
+                </div>
+              }
             </div>
           </div>
         </div>
