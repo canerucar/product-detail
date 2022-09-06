@@ -20,7 +20,7 @@
 
 #### TODO
 - [x] <del>On the left side of the product detail page, there will be a large image and an area with thumbnail images below.</del>
-- [ ] The options for the product will be displayed on the right. Like Color/Size. Whichever color he chooses, the sizes of that color will be shown, if there are no sizes, it will be shown passively. For example, he chose black color from the options and if there is only M size in that color, other sizes will be shown as unselectable.
+- [x] <del>The options for the product will be displayed on the right. Like Color/Size. Whichever color he chooses, the sizes of that color will be shown, if there are no sizes, it will be shown passively. For example, he chose black color from the options and if there is only M size in that color, other sizes will be shown as unselectable. </del>
 - [ ] Price/Piece scale range: There will be a scale range field that shows the range of pieces and the price accordingly, and a number input field where the user can enter the number of products they want to buy. Based on the scale range in the data, the selected scale range will change according to the number entered by the user.
 - [x] <del>At first, all images will be visible. The image of each variant is also available in the data. Related images should be visible according to the selected option. For example, he chose Black color / L size, only those images should be visible.</del>
 - [x] <del>Add to Cart button is not active until all selections are made. After the selections are made, the button becomes active.</del> After the Add cart action, the selected variant and price are displayed on the screen (tooltip, snapped).
